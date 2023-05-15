@@ -1,0 +1,37 @@
+2a
+SELECT * FROM `員工資料` WHERE `性別` = '女' AND `職稱` = '工讀生'
+
+2b
+SELECT * FROM `員工資料` WHERE( `聯絡住址` LIKE '台中市%' AND `性別` LIKE '女') OR `職稱`='工讀生'
+
+2C
+SELECT * FROM `員工資料` WHERE `聯絡住址` LIKE '%台中縣%' AND `職稱` LIKE '%經理%'
+
+2D
+SELECT * FROM `員工資料` WHERE `職稱` NOT LIKE '經理'
+
+3a
+SELECT * FROM `產品資料` WHERE `單價` BETWEEN 10000 AND 20000
+
+3b
+SELECT * FROM `產品資料` WHERE `類別` IN ('Developer','Game')
+
+3c
+SELECT * FROM `產品資料` WHERE `產品名稱` LIKE 'Microsoft%' AND `單價` BETWEEN 20000 AND 30000
+
+
+3d
+SELECT *  FROM `產品資料` WHERE (`類別` IN ('Games') AND `單價` < 2500) OR (`類別` IN ('Office') AND `單價` <5000)
+
+4a
+SELECT `員工編號`,`身份證字號`,`員工姓名`,`職稱`  FROM `員工資料` WHERE `職稱` LIKE '%經理'
+
+4b
+SELECT `員工編號`,`員工姓名`,`聯絡住址`,`電話`  FROM `員工資料` WHERE `職稱` LIKE '工讀生' ORDER BY `員工編號` DESC
+
+5a
+SELECT *  FROM `期中考成績` WHERE `會計` > 80 AND `經濟` > 80 ORDER BY `會計` DESC, `經濟` DESC
+
+5b
+SELECT *, (`國文`+`英文`+`會計`+`經濟`)/4 AS 平均 FROM `期中考成績` ORDER BY 平均 DESC LIMIT 5
+

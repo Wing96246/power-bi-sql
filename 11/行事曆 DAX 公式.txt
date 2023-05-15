@@ -1,0 +1,14 @@
+行事曆 = ADDCOLUMNS( 
+    CALENDAR(
+        MIN('訂單'[訂單日期]),
+        MAX('訂單'[訂單日期])
+    ),
+    "年度",YEAR([Date]) & "年",
+    "季度","Q" & FORMAT([Date],"Q"),
+    "月",MONTH([Date]) & "月",
+    "週",WEEKDAY([Date] )& "週",
+    "年季",YEAR([Date]) & "-" & "Q" & FORMAT([Date], "Q"),
+    "年月",YEAR([Date]) & "-"&FORMAT( MONTH([Date]),"00"),
+    "年週",YEAR([Date])&"-" & WEEKNUM([Date])&"週",
+    "星期",FORMAT([Date],"aaaa"),
+    "中文年月",YEAR([Date])&"年"&MONTH([Date])&"月")

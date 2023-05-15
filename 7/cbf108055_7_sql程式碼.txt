@@ -1,0 +1,37 @@
+2.a
+SELECT 客戶.客戶編號,客戶.公司名稱,客戶.連絡人,訂單.訂單號碼,訂單.訂單日期 FROM 客戶 INNER JOIN 訂單 on 客戶.客戶編號=訂單.客戶編號
+
+SELECT * FROM `查詢 a - 客戶下訂單的日期` WHERE `公司名稱` LIKE '%科技%' ORDER BY `訂單日期`
+
+
+2.b
+SELECT 客戶.公司名稱,客戶.連絡人,SUM(細目列項.數量*產品.單價) AS 總價
+FROM 產品 INNER JOIN((客戶 INNER JOIN 訂單 ON 客戶.客戶編號=訂單.客戶編號)INNER JOIN 細目列項 ON 訂單.訂單號碼=細目列項.訂單編號) ON 細目列項.產品編號=產品.編號
+GROUP BY 客戶.公司名稱,客戶.連絡人     
+ORDER BY 客戶.公司名稱
+
+SELECT * FROM `查詢 e - 每位客戶訂貨的總價` WHERE `公司名稱` LIKE '%科技%' ORDER BY `總價` DESC
+
+
+3.a
+CREATE TABLE 科技客戶 AS(SELECT * FROM `客戶` WHERE `公司名稱` LIKE "%科技%")
+
+3.b
+CREATE TABLE 學誠_96_上半年訂單 AS(SELECT 客戶.公司名稱,訂單.訂單日期,產品.產品名稱,產品.單價,細目列項.數量
+FROM 產品 INNER JOIN ((客戶 INNER JOIN 訂單 ON 客戶.客戶編號=訂單.客戶編號) INNER JOIN 細目列項 ON 訂單.訂單號碼=細目列項.訂單編號) ON 產品.編號=細目列項.產品編號 WHERE 客戶.公司名稱 = "%學誠股份有限公司%" AND 訂單.訂單日期 BETWEEN '1996/1/1' AND '1996/6/30')
+
+4.
+UPDATE `產品資料1` SET `單價`=`單價`*0.8
+
+5.
+INSERT INTO 產品供應商清單1(產品名稱,公司名稱) SELECT 產品供應商清單.產品名稱,產品供應商清單.公司名稱 FROM 產品供應商清單
+
+
+6.
+DELETE FROM 產品供應商清單2 WHERE 公司名稱 = "正東資訊公司"
+
+7.a
+CREATE TABLE 1996年訂單資料 AS(SELECT 訂單.訂單日期,客戶.公司名稱,產品.產品名稱,產品.單價,細目列項.數量 FROM 產品 INNER JOIN((客戶 INNER JOIN 訂單 ON 客戶.客戶編號=訂單.客戶編號)INNER JOIN 細目列項 ON 訂單.訂單號碼=細目列項.訂單編號) ON 產品.編號=細目列項.產品編號 WHERE 訂單.訂單日期 BETWEEN '1996/1/1' AND '1996/12/31')
+
+7.b
+DELETE FROM 訂單1 WHERE 訂單日期 BETWEEN '1996/1/1' AND '1996/12/31'
